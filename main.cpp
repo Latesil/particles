@@ -25,11 +25,16 @@ int main()
         // update particles
         //draw a particle
         int elapsed = SDL_GetTicks();
+
+        screen.clear();
+        swarm.update();
+
         unsigned int green = (1 + sin(elapsed * 0.0001)) * 128; //smooth change (int not char)
         unsigned int red = (1 + sin(elapsed * 0.0002)) * 128;
         unsigned int blue = (1 + sin(elapsed * 0.0003)) * 128;
 
         const Particle* const pParticles = swarm.getParticles();
+
         for(int i=0;i<Swarm::NPARTICLES; i++) {
             Particle particle = pParticles[i];
 
