@@ -46,13 +46,8 @@ bool Screen::init() {
     m_buffer[30000] = 0xFFFFFFFF;
 
     for(int i=0; i<SCREEN_WIDTH * SCREEN_HEIGHT; i++) {
-        m_buffer[i] = 0xEEEA5DFF;
+        m_buffer[i] = 0x00000000;
     }
-
-    SDL_UpdateTexture(m_texture, NULL, m_buffer, SCREEN_WIDTH * sizeof(Uint32));
-    SDL_RenderClear(m_renderer);
-    SDL_RenderCopy(m_renderer, m_texture, NULL, NULL);
-    SDL_RenderPresent(m_renderer);
 
     return true;
 }
@@ -74,6 +69,32 @@ void Screen::close() {
     SDL_DestroyTexture(m_texture);
     SDL_DestroyWindow(m_window);
     SDL_Quit();
+}
+
+void Screen::update() {
+    SDL_UpdateTexture(m_texture, NULL, m_buffer, SCREEN_WIDTH * sizeof(Uint32));
+    SDL_RenderClear(m_renderer);
+    SDL_RenderCopy(m_renderer, m_texture, NULL, NULL);
+    SDL_RenderPresent(m_renderer);
+}
+
+void Screen::setPixel(int x, int y, Uint8 red, Uint8 green, Uint8 blue) {
+
+    if (x < 0 || x >= SCREEN_WIDTH || y < 0 || y >= SCREEN_HEIGHT) {
+        return;
+    }
+
+    Uint32 color = 0;
+
+    color += red;
+    color <<= 8;
+    color += green;
+    color <<= 8;
+    color += blue;
+    color <<= 8;
+    color += 0xFF;
+
+    m_buffer[(y * SCREEN_WIDTH) + x] = color;
 }
 
 }

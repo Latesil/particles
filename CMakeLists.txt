@@ -2,8 +2,8 @@ cmake_minimum_required(VERSION 2.8)
 
 project(sdlone)
 
-set(SOURCES "main.cpp" "screen.cpp")
-set(HEADERS "screen.h")
+set(SOURCES "main.cpp" "screen.cpp" "particle.cpp" "swarm.cpp")
+set(HEADERS "screen.h" "particle.h" "swarm.h")
 
 add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})
 
