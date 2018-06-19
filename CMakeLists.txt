@@ -1,0 +1,12 @@
+cmake_minimum_required(VERSION 2.8)
+
+project(sdlone)
+
+add_executable(${PROJECT_NAME} "main.cpp" "test.cpp")
+
+INCLUDE(FindPkgConfig)
+
+PKG_SEARCH_MODULE(SDL2 REQUIRED sdl2)
+
+INCLUDE_DIRECTORIES(${SDL2_INCLUDE_DIRS})
+TARGET_LINK_LIBRARIES(${PROJECT_NAME} ${SDL2_LIBRARIES})
