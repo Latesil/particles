@@ -2,7 +2,10 @@ cmake_minimum_required(VERSION 2.8)
 
 project(sdlone)
 
-add_executable(${PROJECT_NAME} "main.cpp" "test.cpp")
+set(SOURCES "main.cpp" "screen.cpp")
+set(HEADERS "screen.h")
+
+add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})
 
 INCLUDE(FindPkgConfig)
 
